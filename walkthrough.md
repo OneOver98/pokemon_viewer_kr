@@ -1,33 +1,44 @@
-# PvPoke RL Environment - Walkthrough
+# AI Prompt: Build a Pokémon Team Viewer Web App
 
-## Overview
+You are an expert web developer tasked with creating a "Pokémon Team Viewer" application. Your goal is to build a web-based tool that allows users to search for players and view their 6-Pokémon teams exactly as they would appear in the PvPoke battle simulator. 
 
-We have successfully bridged the open-source Pokémon GO battle simulator (PvPoke) into a Python-native Reinforcement Learning environment using `stable-baselines3`, `Gymnasium`, and `Node.js`.
+## Technical Stack
+- Vanilla HTML, CSS, and JavaScript.
+- No heavy frameworks (like React or Angular) are necessary; keep it lightweight and fast.
+- You will be working with four main files: `index.html`, `style.css`, `app.js`, and a `data.json` file which contains the dataset.
 
-### Changes Made
+## Core Features and Requirements
 
-1. **[NEW] [ai_pipeline/pvpoke_env.js](file:///c:/Users/jake/ai_1o/ai_pipeline/pvpoke_env.js)**: 
-   A headless wrapper running in Node.js. It reads the source JS files from `pvpoke/src/js/` and utilizes `vm.runInContext` to evaluate the globals (`Battle`, `Pokemon`, `GameMaster`). It overrides `$.ajax` to synchronously fetch `GameMaster` definitions from `pvpoke/src/data/`. Afterwards, it loops over `process.stdin`, parsing JSON action commands from Python, issuing `battle.queueAction`, advancing `battle.step()`, and replying with the JSON state (HP, Energy, Shields, Cooldowns, Buffs).
+1. **Player Search Functionality**:
+   - The user interface must include a search bar where users can look up a specific player by name.
+   - The app should parse the `data.json` dataset to find matching players and their respective teams.
 
-2. **[NEW] `ai_pipeline/pvpoke_gym.py`**:
-   A Gymnasium `Env` class that spawns `node pvpoke_env.js` as a subprocess. It maps RL actions (spaces.Discrete) into PvPoke JSON payloads and scales the state down to a normalized `spaces.Box` observation (scale of 0.0 to 1.0). The reward correctly utilizes HP differential. 
+2. **6-Pokémon Team Display**:
+   - Display the player's 6-Pokémon team when selected.
+   - The team layout and visual representation must closely mimic the format used by the open-source **PvPoke battle simulator** (including species names, stats, moves, CP, and typical Pokemon sprites).
 
-3. **[NEW] `ai_pipeline/train.py`**:
-   A training script leveraging `stable-baselines3`'s `PPO`. It creates parallel environments scaling horizontally with the user's multi-core CPU via `SubprocVecEnv` (up to 8 environments). The network inherently delegates PyTorch computation to the RTX 3060 CUDA GPU.
+3. **PvPoke Export "Copy" Feature**:
+   - Include a prominently featured "Copy" button for the team.
+   - When clicked, this button should generate and copy to the user's clipboard a **standard PvPoke-compatible team export string**.
+   - This ensures seamless integration, allowing users to paste the copied string directly into the PvPoke engine.
 
-### Verification Results
+4. **Modern, Glassmorphic UI**:
+   - Design the application using modern aesthetic principles. 
+   - Feature a **glassmorphism** design scheme: translucent backgrounds, subtle frosted glass effects, layered UI, vibrant yet harmonious gradients in the background, readable modern typography (like Inter or Roboto).
+   - Use dynamic hover effects and micro-animations to make the interface feel responsive and alive. Ensure it feels like a premium app.
 
-The test execution of `python train.py` revealed:
+5. **Responsiveness**:
+   - Ensure the layout is fully responsive and looks stunning on both desktop and mobile devices. 
+   - The 6-Pokémon team grid should gracefully wrap or collapse depending on screen width.
 
-1. **Successful Initialization**: Node.js processes properly booted, loading 1710 Pokémon species into the `GameMaster` state completely headlessly (without needing browser APIs).
-2. **Synchronous Multiprocessing**: Handshaking was successful across 8 vectorized Gym instances simultaneously. 
-3. **Training Iteration**: Python properly batched inputs and outputs using IO pipes, converting JSON into Float32 observation Tensors, executing steps seamlessly.
+## Step-by-Step Implementation Approach
 
-> [!NOTE]
-> Currently, PyTorch in this venv is defaulting to the `cpu` variant. To utilize your RTX 3060 fully, simply install the `cu118` or `cu121` wheel of PyTorch inside your `ai_pipeline` working directory:  
-> `pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118`
-> The `train.py` script possesses `device="cuda" if torch.cuda.is_available() else "cpu"`, so it will automatically run on the GPU after installing the `cu118` version.
+1. **Setup Core HTML (`index.html`)**: Build the semantic skeleton, including the search container, the display area for the 6 Pokémon, and the copy button. Include references to `style.css` and `app.js`.
+2. **Implement Glassmorphic Styling (`style.css`)**: Add your CSS variables, the dynamic gradient backgrounds, the frosted glass UI component styles (`backdrop-filter: blur()`), and responsive flex/grid layouts.
+3. **Data Loading and Logic (`app.js`)**: 
+   - Fetch the player data from `data.json`.
+   - Implement the search filtering logic.
+   - Dynamically render the team interface into the DOM based on search results.
+   - Implement the export string generation logic and copy-to-clipboard functionality.
 
-### Future Work
-
-The current script uses Azumarill vs Skarmory as standard fixed Pokémon, and only Fast / Charged Attack actions. You can extend `pvpoke_gym.py` later to cover `Switch` mechanics or randomize matchups in `reset()`.
+Please generate the complete, ready-to-run code for `index.html`, `style.css`, and `app.js` based on these specifications.
