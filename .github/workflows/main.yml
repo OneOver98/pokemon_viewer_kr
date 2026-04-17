@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # You can change '.' to your subfolder, e.g. './pokemon-viewer'
-          path: '.'
+          path: './pokemon-viewer'
 
       - name: Deploy to GitHub Pages
         id: deployment
