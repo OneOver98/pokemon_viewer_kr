@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PvPoke Team Viewer V2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Team Builder UI Viewer</h1>
+      <p style="color: var(--text-muted); font-size: 14px;">Mirroring the exact format of PvPoke team rosters.</p>
+    </div>
+
+    <div class="search-box">
+      <div class="search-container-wrap">
+        <input type="text" id="searchInput" placeholder="Search Trainer Name or GamerTag..." autocomplete="off">
+        <div id="suggestionsBox" class="suggestions"></div>
+      </div>
+      <button id="searchBtn">Search</button>
+      <button id="copyBtn" class="copy-btn" style="margin-top:0;">Copy Export String</button>
+    </div>
+
+    <h2 id="playerName" style="margin-top: 30px; display: none;">Player Team</h2>
+    
+    <div class="poke multi">
+      <div class="team-grid" id="teamContainer">
+        <!-- .poke.single clones will go here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

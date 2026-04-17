@@ -1,0 +1,241 @@
+:root {
+  --bg: #1c1c1c;
+  --panel: #2e2e2e;
+  --text: #ffffff;
+  --text-muted: #999999;
+  --border: #444444;
+  --border-light: #555555;
+  --accent: #007bff;
+  
+  --type-bug: #92bc2c;
+  --type-dark: #595761;
+  --type-dragon: #0c69c8;
+  --type-electric: #f2d94e;
+  --type-fairy: #ee90e6;
+  --type-fighting: #d3425f;
+  --type-fire: #fba54c;
+  --type-flying: #a1bbec;
+  --type-ghost: #5f6dbc;
+  --type-grass: #5fbd58;
+  --type-ground: #da7c4d;
+  --type-ice: #75d0c1;
+  --type-normal: #a0a29f;
+  --type-poison: #b763cf;
+  --type-psychic: #fa8581;
+  --type-rock: #c9bb8a;
+  --type-steel: #5695a3;
+  --type-water: #539ddf;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 20px;
+}
+
+h1, h2, h3 { margin: 0 0 10px 0; font-weight: 500; font-size: 18px; }
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.search-box {
+  display: flex;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 10px 15px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.search-box button {
+  padding: 10px 20px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* PvPoke Pokemon Selection Container Structure */
+.poke.multi {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.poke-stats {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.poke.single {
+  flex: 1 1 300px;
+  background: #252525;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 15px;
+  min-width: 300px;
+}
+
+.base-name {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.cp {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 0;
+  text-transform: uppercase;
+}
+
+.cp .stat {
+  font-weight: bold;
+  color: var(--text);
+}
+
+.types {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.type {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  background: #444; /* fallback */
+}
+
+/* Type Colors mapped exactly from PvPoke logic */
+.type.bug { background-color: var(--type-bug); }
+.type.dark { background-color: var(--type-dark); }
+.type.dragon { background-color: var(--type-dragon); }
+.type.electric { background-color: var(--type-electric); color: #000; text-shadow: none; }
+.type.fairy { background-color: var(--type-fairy); color: #000; text-shadow: none;}
+.type.fighting { background-color: var(--type-fighting); }
+.type.fire { background-color: var(--type-fire); }
+.type.flying { background-color: var(--type-flying); color: #000; text-shadow: none; }
+.type.ghost { background-color: var(--type-ghost); }
+.type.grass { background-color: var(--type-grass); color: #000; text-shadow: none; }
+.type.ground { background-color: var(--type-ground); }
+.type.ice { background-color: var(--type-ice); color: #000; text-shadow: none; }
+.type.normal { background-color: var(--type-normal); color: #000; text-shadow: none; }
+.type.poison { background-color: var(--type-poison); }
+.type.psychic { background-color: var(--type-psychic); }
+.type.rock { background-color: var(--type-rock); color: #000; text-shadow: none;}
+.type.steel { background-color: var(--type-steel); }
+.type.water { background-color: var(--type-water); }
+.type.none { display: none; }
+
+.section-title {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+  margin-top: 15px;
+}
+
+.move-select {
+  display: flex;
+  align-items: center;
+  background: #111;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-bottom: 5px;
+}
+
+.move-select .type {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  padding: 0;
+  display: inline-block;
+  margin-right: 10px;
+  flex-shrink: 0;
+  color: transparent; /* hide text in the little circle */
+  overflow: hidden;
+  text-indent: -9999px;
+  text-shadow: none;
+}
+
+.move-select .name {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy-btn {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background: var(--border-light);
+  color: white;
+  border: 1px solid #777;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.copy-btn:hover { background: #666; }
+
+/* Suggestions Dropdown */
+.suggestions {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  left: 0; top: 100%;
+  z-index: 10;
+  display: none;
+}
+.suggestions.active { display: block; }
+.suggestion-item {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.suggestion-item:hover { background: var(--border); }
+.search-container-wrap { position: relative; flex: 1; display:flex;}
